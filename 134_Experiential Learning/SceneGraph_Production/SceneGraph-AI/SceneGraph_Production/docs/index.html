@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101419">
+  <meta name="description" content="SceneGraph Studio: intelligent screenplay analysis and production optimization">
+  <link rel="icon" href="./favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <title>SceneGraph — Production intelligence</title>
+</head>
+
+<body>
+  <div id="loadingOverlay" class="loading-overlay" role="status" aria-live="polite" aria-atomic="true" aria-busy="true"
+    hidden>
+    <div class="loading-card"><span class="loading-spinner" aria-hidden="true"></span><strong
+        id="loadingMessage">Loading your workspace…</strong></div>
+  </div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark"><span></span><span></span><span></span></span>
+        <div><strong>SCENE<span>GRAPH</span></strong><small>PRODUCTION INTELLIGENCE</small></div>
+      </div>
+      <p class="nav-caption">WORKSPACE</p>
+      <nav id="nav" aria-label="Main navigation">
+        <button data-view="overview" class="nav-link active"><span class="nav-glyph">◫</span> Overview</button>
+        <button data-view="studio" class="nav-link"><span class="nav-glyph">▤</span> Script studio</button>
+        <button data-view="planner" class="nav-link"><span class="nav-glyph">▦</span> Production planner</button>
+        <button data-view="tracker" class="nav-link"><span class="nav-glyph">☑</span> Shoot tracker</button>
+        <details id="moreTools" class="nav-group">
+          <summary class="nav-link"><span class="nav-glyph">···</span> More tools</summary>
+          <button data-view="graph" class="nav-link nav-sub-link"><span class="nav-glyph">⌘</span> Knowledge
+            graph</button>
+          <button data-view="continuity" class="nav-link nav-sub-link"><span class="nav-glyph">◇</span>
+            Continuity</button>
+          <button data-view="analytics" class="nav-link nav-sub-link"><span class="nav-glyph">◷</span>
+            Analytics</button>
+        </details>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="system-pill"><span class="pulse"></span> PRIVATE ACCOUNT · SQL DATABASE</div>
+        <p>Built with Python and independent engineering modules.</p>
+        <div class="sidebar-caption">SCENEGRAPH STUDIO <span>V1.0</span></div>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="topbar-context">
+          <div class="breadcrumb">WORKSPACE <span>/</span> <strong id="currentCrumb">OVERVIEW</strong></div>
+          <div class="topbar-divider" aria-hidden="true"></div>
+          <div class="project-dropdown" id="projectDropdown"><button type="button" class="project-dropdown-btn"
+              id="projectDropdownBtn" aria-haspopup="listbox" aria-expanded="false"
+              title="Switch screenplay / production"><span class="project-dropdown-label"
+                id="projectDropdownLabel">Select Script</span><svg class="project-dropdown-arrow" width="12" height="12"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg></button>
+            <div class="project-dropdown-menu" id="projectDropdownMenu" role="listbox" aria-label="Available scripts"></div>
+          </div><select aria-label="Switch production" title="Switch production" id="projectSelect"
+            class="project-select" hidden></select>
+        </div>
+        <div class="top-actions"><button class="ghost-button" id="accountBtn" data-action="account"
+            hidden>ACCOUNT</button><button class="ghost-button" id="logoutBtn" title="Sign out">SIGN OUT</button><button
+            class="ghost-button" id="deleteProjectBtn" title="Delete this production" hidden>DELETE</button><button
+            class="ghost-button" id="exportBtn" title="Download current production report" hidden>⇩
+            <span>EXPORT</span></button><button class="button button-primary" id="newProjectBtn">+ NEW PROJECT</button>
+        </div>
+      </header>
+      <main id="content" class="content">
+        <div class="loading">INITIALIZING PRODUCTION SYSTEM<span class="dots">...</span></div>
+      </main>
+      <footer class="footer">SCENEGRAPH / ENGINEERING STUDIO <span>SCENES ARE DATA. STORIES ARE CONNECTIONS.</span>
+        <span>© SCENEGRAPH AI · PRODUCTION SYSTEM</span>
+      </footer>
+    </div>
+  </div>
+  <div id="authBackdrop" class="auth-backdrop">
+    <div class="auth-film-strip">S C E N E G R A P H <span>•</span> P R O D U C T I O N&nbsp;&nbsp;I N T E L L I G E N C
+      E</div>
+    <div class="auth-layout">
+      <div class="auth-editorial">
+        <span class="auth-kicker">THE CREATIVE OPERATIONS SYSTEM</span>
+        <h1>Make every<br>scene <em>count.</em></h1>
+        <p>From the first line of a screenplay to the final call sheet. Structure your story, map the connections, and
+          schedule the impossible.</p>
+        <div class="auth-feature-row"><span>01 / PARSE</span><span>02 / CONNECT</span><span>03 / OPTIMIZE</span></div>
+        <div class="auth-decor">
+          <div class="auth-reel"></div>
+          <div class="auth-floating">SCENE 01<br>INT. STUDIO — NIGHT<br><b>A better way to create.</b></div>
+        </div>
+      </div>
+      <div class="auth-panel">
+        <div class="auth-card">
+          <div class="auth-brand"><span class="auth-brand-mark">◈</span> SCENE<span>GRAPH</span> <small>AI</small></div>
+          <p class="auth-card-heading" id="authHeading">Welcome back.</p>
+          <p class="auth-card-desc" id="authDesc">Your productions. Your private workspace.</p>
+          <form id="authForm" class="auth-form" novalidate>
+            <div class="field" id="nameField" style="display:none"><label for="authName">FULL NAME</label><input
+                class="input" id="authName" autocomplete="name" maxlength="100" placeholder="Your name"></div>
+            <div class="field" id="emailField"><label for="authEmail">EMAIL ADDRESS</label><input type="email"
+                class="input" id="authEmail" required autocomplete="email" placeholder="you@example.com"></div>
+            <div class="field" id="otpField" style="display:none">
+              <div class="field-header">
+                <label for="authOtp">VERIFICATION CODE</label>
+                <button type="button" class="auth-link-subtle" id="sendOtpBtn">SEND CODE</button>
+              </div>
+              <div class="otp-input-group">
+                <input type="text" class="input otp-input" id="authOtp" inputmode="numeric" maxlength="8" placeholder="••••••" autocomplete="one-time-code">
+              </div>
+            </div>
+            <div class="field" id="passwordField">
+              <div class="field-header">
+                <label for="authPassword" id="passwordLabel">PASSWORD</label>
+                <button type="button" class="auth-link-subtle" id="forgotPwBtn">Forgot password?</button>
+              </div>
+              <div class="password-input-wrap">
+                <input type="password" class="input" id="authPassword" required autocomplete="current-password"
+                  placeholder="At least 10 characters">
+                <button type="button" class="pw-toggle-btn" data-target="authPassword" title="Show or hide password"
+                  aria-label="Show password">
+                  <svg class="eye-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  <svg class="eye-closed" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                    <path
+                      d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                    <line x1="1" y1="1" x2="23" y2="23" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="field" id="confirmPasswordField" style="display:none">
+              <div class="field-header">
+                <label for="authConfirmPassword" id="confirmPasswordLabel">CONFIRM PASSWORD</label>
+              </div>
+              <div class="password-input-wrap">
+                <input type="password" class="input" id="authConfirmPassword" autocomplete="new-password"
+                  placeholder="Re-enter your password">
+                <button type="button" class="pw-toggle-btn" data-target="authConfirmPassword" title="Show or hide password"
+                  aria-label="Show password">
+                  <svg class="eye-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  <svg class="eye-closed" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                    <path
+                      d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                    <line x1="1" y1="1" x2="23" y2="23" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div id="authSuccess" class="auth-success" role="status" hidden></div>
+            <div id="authError" class="auth-error" role="alert" hidden></div>
+            <button class="button button-primary auth-submit" id="authSubmit" type="submit">SIGN IN TO STUDIO ↗</button>
+          </form>
+          <div class="auth-divider" id="authProviderDivider"><span>OR SIGN IN WITH</span></div>
+          <div class="google-provider">
+            <div id="googleSignIn" class="google-signin"><button class="button" type="button" disabled>CONTINUE WITH GOOGLE</button></div>
+            <p id="googleProviderStatus" class="provider-setup-note" hidden></p>
+          </div>
+          <div id="authProviderNotice" class="auth-provider-notice" role="status" hidden></div>
+          <p class="auth-toggle" id="authToggleWrap">New to SceneGraph? <button id="authToggle" type="button">Create an account</button></p>
+          <div id="serverConfig" class="server-config" hidden>
+            <div id="localServerHint" hidden>
+              <p><b>OPEN THE LOCAL APP</b> — A <code>file:///</code> page cannot securely connect to the sign-in API.
+              </p><a class="small-button" href="http://localhost:8000/">OPEN SCENEGRAPH ON LOCALHOST</a> <small
+                style="display:block;margin-top:6px;color:var(--muted);">(or http://127.0.0.1:8000/)</small>
+            </div>
+            <div id="remoteServerConfig">
+              <p><b>API CONNECTION</b> — For GitHub Pages, connect your deployed Python backend.</p><label>BACKEND
+                URL</label><input class="input" id="serverUrl" placeholder="https://your-backend.onrender.com"><button
+                class="small-button" id="saveServerBtn" type="button">USE THIS BACKEND</button><small>For a public link
+                that works for everyone, set the URL in <code>docs/config.js</code> before publishing.</small>
+            </div>
+          </div>
+        </div>
+        <div class="auth-note">SECURE WORKSPACE • PYTHON API • PERSISTENT DATABASE</div>
+      </div>
+    </div>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <div id="dialogBackdrop" class="dialog-backdrop hidden">
+    <div class="dialog" id="dialog" role="dialog" aria-modal="true"></div>
+  </div>
+  <script src="./config.js"></script>
+  <script src="./app.js" defer></script>
+</body>
+
+</html>

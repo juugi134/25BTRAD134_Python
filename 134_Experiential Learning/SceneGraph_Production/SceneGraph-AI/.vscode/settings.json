@@ -1,0 +1,9 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/SceneGraph_Production/.venv/Scripts/python.exe",
+  "python.terminal.activateEnvironment": true,
+  "terminal.integrated.env.windows": {
+    "VIRTUAL_ENV": "${workspaceFolder}\\SceneGraph_Production\\.venv",
+    "PATH": "${workspaceFolder}\\SceneGraph_Production\\.venv\\Scripts;${env:PATH}",
+    "PYTHONIOENCODING": "utf-8"
+  }
+}
