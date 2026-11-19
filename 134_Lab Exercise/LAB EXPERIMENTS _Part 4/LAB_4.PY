@@ -74,7 +74,7 @@ while True:
 
     else:
         print("Invalid choice")
-Lab Exercise 13: CSV-based payroll management system
+#Lab Exercise 13: CSV-based payroll management system
 
 import csv
 
